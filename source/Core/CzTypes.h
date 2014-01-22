@@ -25,6 +25,7 @@
 #include "CzVec4.h"
 #include "CzMatrix3.h"
 #include "CzMatrix4.h"
+#include "CzMatrixAffine2d.h"
 #include "CzColour.h"
 
 #define	CzList		std::list

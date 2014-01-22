@@ -310,6 +310,8 @@ files
 	CzMatrix3.h
 	CzMatrix4.cpp
 	CzMatrix4.h
+	CzMatrixAffine2d.cpp
+	CzMatrixAffine2d.h
 	CzRect.cpp
 	CzRect.h
 	CzShapes.cpp

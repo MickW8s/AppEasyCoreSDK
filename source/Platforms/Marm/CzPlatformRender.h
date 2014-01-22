@@ -61,7 +61,7 @@ public:
 	// Primitive rendering
 	void			DrawPrimitives(CzRenderPrim* prims, CzRenderMaterial* materials, int num_prims, bool single_material);
 	void			DrawPrimitives(CzRenderPrim3* prims, CzRenderMaterial* materials, int num_prims, bool single_material);
-	void			DrawText(CzFontPreparedText prepared_text, CzFont* font, CzMatrix3* transform, const CzColour& colour, CzVec4& skew, bool filter, eCzAlphaMode alpha_mode);
+	void			DrawText(CzFontPreparedText prepared_text, CzFont* font, CzMatrixAffine2d* transform, const CzColour& colour, CzVec4& skew, bool filter, eCzAlphaMode alpha_mode);
 
 	// Batch rendering
 	void			AddPrimtives(CzRenderPrim* prims, CzRenderMaterial* materials, int num_prims, bool single_material);

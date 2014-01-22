@@ -74,7 +74,7 @@ protected:
 	CzSpriteManager*		Manager;				///< Parent sprite manager
 	float					Width, Height;			///< Destination width and height (used to represent the visible extents of the sprite on screen)
 	float					Depth;					///< Depth
-	CzMatrix3				Transform;				///< Transform
+	CzMatrixAffine2d		Transform;				///< Transform
 	CzVec2					Position;				///< Position of the sprite
 	CzVec2					Origin;					///< Origin of sprite (0, 0 is sprites centre)
 	CzVec4					Skew;					///< 4 vertex skew offsets (3 bit fixed)
@@ -221,7 +221,7 @@ public:
 	bool			isInUse() const				{ return InUse; }
 	void			setLayer(int layer)			{ Layer = layer; }
 	int				getLayer() const			{ return Layer; }
-	CzMatrix3&		getTransform()				{ if (TransformDirty) RebuildTransform(); return Transform; }
+	CzMatrixAffine2d& getTransform()				{ if (TransformDirty) RebuildTransform(); return Transform; }
 	void			setLinkedTo(CzSprite* sprite);
 	CzSprite*		getLinkedTo()				{ return LinkedTo; }
 	float			getAccumDepth() const		{ return AccumDepth; }
@@ -233,7 +233,7 @@ public:
 	CzVec4			getScreenClipRect() const	{ return ScreenClipRect; }
 	void			setBeforeChildren(bool before) { BeforeChildren = before; }
 	bool			getBeforeChildren() const	{ return BeforeChildren; }
-	CzMatrix3&		getFinalTransform()			{ return FinalTransform; }
+	CzMatrixAffine2d& getFinalTransform()			{ return FinalTransform; }
 	bool			affectsClip() const			{ return ClipRect.w >= 0; }
 	CzVec4			FindFirstClipRect();
 	CzVec4			FindFirstScreenClipRect();
@@ -258,7 +258,7 @@ public:
 	// Properties End
 protected:
 	bool			ChildChangeClip;			///< Set to true if child changes clip rect
-	CzMatrix3		FinalTransform;				///< Final transform
+	CzMatrixAffine2d FinalTransform;				///< Final transform
 	bool			TransformDirty;				///< Dirty when transform changed
 	CzRenderPrim*	Prim;						///< 2D renderer primitive used to render this sprite
 	CzRenderMaterial* Material;					///< Material used to render this sprite

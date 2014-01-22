@@ -36,8 +36,8 @@ public:
 
 	// Properties
 protected:
-	CzMatrix3				Transform;				// Transform
-	CzMatrix3				TransformNoCamera;		// Transform without camera
+	CzMatrixAffine2d		Transform;				// Transform
+	CzMatrixAffine2d		TransformNoCamera;		// Transform without camera
 	CzList<CzSprite*>		Sprites;				// Our list of sprites
 	CzSlotArray<CzSprite*>*	Layers;					// Visible layers used in depth sorting
 	bool					Batching;				// Enable sprite batching
@@ -48,10 +48,10 @@ protected:
 public:
 	void				addSprite(CzSprite* sprite);
 	void				removeSprite(CzSprite* sprite, bool delete_sprites = true);
-	void				setTransform(const CzMatrix3& transform)	{ Transform = transform; DirtyChildTransforms(); }
-	CzMatrix3&			getTransform() 							{ return Transform; }
-	void				setTransformNoCamera(const CzMatrix3& transform)	{ TransformNoCamera = transform; DirtyChildTransforms(); }
-	CzMatrix3&			getTransformNoCamera() 					{ return TransformNoCamera; }
+	void				setTransform(const CzMatrixAffine2d& transform)	{ Transform = transform; DirtyChildTransforms(); }
+	CzMatrixAffine2d&	getTransform() 							{ return Transform; }
+	void				setTransformNoCamera(const CzMatrixAffine2d& transform)	{ TransformNoCamera = transform; DirtyChildTransforms(); }
+	CzMatrixAffine2d&	getTransformNoCamera() 					{ return TransformNoCamera; }
 	void				setBatching(bool batching)				{ Batching = batching; }
 	bool				getBatching() const						{ return Batching; }
 	void				setCOP(float x, float y)				{ COP.x = x; COP.y = y; }

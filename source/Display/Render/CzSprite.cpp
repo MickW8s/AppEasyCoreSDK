@@ -110,14 +110,14 @@ void CzSprite::RebuildTransform()
 {
 	// Build the transform
 	AccumDepth = Depth;
-	CzMatrix3 trans;
+	CzMatrixAffine2d trans;
 	trans.Translate(&Origin);
 	// Set the rotation transform
 	Transform.Rotate(Angle);
 	// Scale the transform
 	if (ScaleX != 1.0f || ScaleY != 1.0f)
 	{
-		CzMatrix3 scale;
+		CzMatrixAffine2d scale;
 		scale.Scale(ScaleX, ScaleY);
 		Transform.Multiply(&scale);
 	}
@@ -873,7 +873,7 @@ void CzSprite::BuildFinalTransform()
 			CzVec2 cop = Manager->getCOP();
 			CzVec2 centre = Manager->getScreenCentre();
 
-			CzMatrix3 m;
+			CzMatrixAffine2d m;
 			if (IgnoreCamera)
 				m = Manager->getTransformNoCamera();
 			else

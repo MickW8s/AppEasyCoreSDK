@@ -48,7 +48,7 @@ void CzTextSprite::RebuildTransform()
 //	Transform.ScaleRotation(ScaleX, ScaleY);
 	if (ScaleX != 1.0f || ScaleY != 1.0f)
 	{
-		CzMatrix3 scale;
+		CzMatrixAffine2d scale;
 		scale.Scale(ScaleX, ScaleY);
 		Transform.Multiply(&scale);
 	}
@@ -56,7 +56,7 @@ void CzTextSprite::RebuildTransform()
 	Transform.TranslateSet(&Position);
 
 	// Apply origin
-	CzMatrix3 trans;
+	CzMatrixAffine2d trans;
 	CzVec2 org = Origin;
 	org.x -= (float)Rect.w / 2;
 	org.y -= (float)Rect.h / 2;
@@ -102,7 +102,7 @@ void CzTextSprite::TransformVertices()
 			CzVec2 cop = Manager->getCOP();
 			CzVec2 centre = Manager->getScreenCentre();
 
-			CzMatrix3 m;
+			CzMatrixAffine2d m;
 			if (IgnoreCamera)
 				m = Manager->getTransformNoCamera();
 			else

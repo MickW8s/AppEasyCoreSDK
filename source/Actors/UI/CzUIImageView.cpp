@@ -308,7 +308,7 @@ bool CzUIImageView::Update(float dt)
 		linked = linked->getLinkedTo();
 	}
 
-	CzMatrix3& transform = Scene->getVirtualTransform();
+	CzMatrixAffine2d& transform = Scene->getVirtualTransform();
 	if ((touch1 != NULL && touch1->active) && (touch2 == NULL || !touch2->active))
 	{
 		// Handle panning
@@ -317,7 +317,7 @@ bool CzUIImageView::Update(float dt)
 		CzIVec2 drag_delta = CZ_INPUT->getDragDelta(0);
 		if (drag_delta.x != 0 || drag_delta.y != 0)
 		{
-			CzMatrix3& transform2 = Visual->getFinalTransform();
+			CzMatrixAffine2d& transform2 = Visual->getFinalTransform();
 			CzVec2 drag = CzVec2(((float)drag_delta.x) / transform2.m[0][0], ((float)drag_delta.y) / transform2.m[1][1]);
 			if (drag.x >= -1 && drag.x <= 1)
 				drag.x = 0;

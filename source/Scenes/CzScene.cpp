@@ -1093,7 +1093,7 @@ void CzScene::setVirtualTransform(int required_width, int required_height, float
 	}
 
 	// Build rotation / scale tranform
-	CzMatrix3 scale;
+	CzMatrixAffine2d scale;
 	scale.Scale(scale_x, scale_y);
 	VirtualTransform.Rotate(angle);
 	VirtualTransform.MultiplyPost(&scale);
@@ -1927,7 +1927,7 @@ void CzScene::Update(float dt)
 		if (Extents.w != 0)
 		{
 //						CzVec2 offs = ScreenToVirtual(ScreenSize.x / 2.0f, ScreenSize.y / 2.0f);
-			CzMatrix3 trans = Camera->getTransform();
+			CzMatrixAffine2d trans = Camera->getTransform();
 			float min_x = (float)Extents.x;
 			float min_y = (float)Extents.y;
 			float max_x = (float)(Extents.x + Extents.w);
@@ -2264,7 +2264,7 @@ CzVec2 CzScene::ScreenToCamera(float pos_x, float pos_y, bool ignore_translation
 	CzVec2 cam_pos = CzVec2(0, 0);
 	if (Camera != NULL)
 		cam_pos = Camera->getPosition();
-	CzMatrix3 cam_transform;
+	CzMatrixAffine2d cam_transform;
 	cam_transform.Identity();
 
 	if (Camera != NULL)

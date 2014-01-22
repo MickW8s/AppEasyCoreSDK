@@ -735,8 +735,8 @@ protected:
 	eOrientation			Orientation;		///< Current display orientation
 	CzIVec2					ScreenSize;			///< Native screen size
 	CzIVec2					VirtualSize;		///< The virtual size is not the actual size of the scene. but a static pretend size that we can use to render to without having to cater for different sized displays
-	CzMatrix3				VirtualTransform;	///< Virtual transform is used to scale, translate and rotate scene to fit different display sizes and orientations
-	CzMatrix3				Transform;			///< Scene transform
+	CzMatrixAffine2d		VirtualTransform;	///< Virtual transform is used to scale, translate and rotate scene to fit different display sizes and orientations
+	CzMatrixAffine2d		Transform;			///< Scene transform
 	CzList<CzActor*>		Actors;				///< Collection of scene actors
 	CzIRect					Extents;			///< Extents of scenes world
 	CzCamera*				Camera;				///< Current camera
@@ -781,8 +781,8 @@ public:
 	CzIVec2					getVirtualSize() const					{ return VirtualSize; }
 	void					setVirtualTransform(int required_width, int required_height, float angle, bool fix_aspect = false, bool lock_width = false, eCanvasOrigin canvas_origin = Origin_Centre);
 	void					setVirtualTransform(int required_width, int required_height, float angle, eCanvasFit fit = Fit_Best, eCanvasOrigin canvas_origin = Origin_Centre);
-	CzMatrix3&				getVirtualTransform()					{ return VirtualTransform; }
-	CzMatrix3&				getTransform()							{ return Transform; }
+	CzMatrixAffine2d&		getVirtualTransform()					{ return VirtualTransform; }
+	CzMatrixAffine2d&		getTransform()							{ return Transform; }
 	void					setCanvasFit(eCanvasFit fit)			{ CanvasFit = fit; }
 	eCanvasFit				getCanvasFit() const					{ return CanvasFit; }
 	eCanvasOrigin			getCanvasOrigin() const					{ return CanvasOrigin; }

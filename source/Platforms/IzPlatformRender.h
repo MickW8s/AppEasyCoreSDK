@@ -130,7 +130,7 @@ public:
 	// Primitive rendering
 	virtual void	DrawPrimitives(CzRenderPrim* prims, CzRenderMaterial* materials, int num_prims, bool single_material) = 0;
 	virtual void	DrawPrimitives(CzRenderPrim3* prims, CzRenderMaterial* materials, int num_prims, bool single_material) = 0;
-	virtual void	DrawText(CzFontPreparedText prepared_text, CzFont* font, CzMatrix3* transform, const CzColour& colour, CzVec4& skew, bool filter, eCzAlphaMode alpha_mode) = 0;
+	virtual void	DrawText(CzFontPreparedText prepared_text, CzFont* font, CzMatrixAffine2d* transform, const CzColour& colour, CzVec4& skew, bool filter, eCzAlphaMode alpha_mode) = 0;
 
 	// Batch rendering
 	virtual void	AddPrimtives(CzRenderPrim* prims, CzRenderMaterial* materials, int num_prims, bool single_material) = 0;

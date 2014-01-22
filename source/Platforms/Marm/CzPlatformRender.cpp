@@ -211,7 +211,7 @@ void CzPlatformRender::DrawPrimitives(CzRenderPrim3* prims, CzRenderMaterial* ma
 	}
 }
 
-void CzPlatformRender::DrawText(CzFontPreparedText prepared_text, CzFont* font, CzMatrix3* transform, const CzColour& colour, CzVec4& skew, bool filter, eCzAlphaMode alpha_mode)
+void CzPlatformRender::DrawText(CzFontPreparedText prepared_text, CzFont* font, CzMatrixAffine2d* transform, const CzColour& colour, CzVec4& skew, bool filter, eCzAlphaMode alpha_mode)
 {
 	CIwMaterial::AlphaMode am = (CIwMaterial::AlphaMode)alpha_mode; // TODO Add proper method map Marmalade Alpha mode to Marmalade
 

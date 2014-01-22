@@ -412,7 +412,7 @@ void CzCamera::Update(float dt)
 	if (TransformDirty)
 	{
 		// Update camera transform
-		CzMatrix3 scale;
+		CzMatrixAffine2d scale;
 		scale.Scale(Scale, Scale);
 		Transform.Rotate(Angle);
 		Transform.MultiplyPost(&scale);

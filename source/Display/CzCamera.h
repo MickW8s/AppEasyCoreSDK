@@ -82,7 +82,7 @@ public:
 	// Properties
 protected:
 	CzScene*				Scene;				///< Parent scene
-	CzMatrix3				Transform;			///< The combined camera transform
+	CzMatrixAffine2d		Transform;			///< The combined camera transform
 	CzVec2					Position;			///< Position of camera within scene
 	CzVec2					Velocity;			///< Velocity of camera
 	CzVec2					VelocityDamping;	///< Velocity cadmping applied to slow the camera
@@ -98,7 +98,7 @@ protected:
 	bool					TouchPanY;			///< If true then the camera will pan along the y-axis with the users touch
 	bool					IgnoreActors;		///< if an actor is currently focused then it will usually prevent touch panning, this will disable that
 public:
-	CzMatrix3&				getTransform()						{ return Transform; }
+	CzMatrixAffine2d&		getTransform()						{ return Transform; }
 	void					setPosition(float x, float y)		{ Position.x = x; Position.y = y; TransformDirty = true; }
 	CzVec2					getPosition() const					{ return Position; }
 	void					setVelocity(float x, float y)		{ Velocity.x = x; Velocity.y = y; }
