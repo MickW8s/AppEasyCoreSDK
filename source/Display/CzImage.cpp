@@ -44,6 +44,8 @@ int CzImage::getHeight() const					{ return TextureInfo.Height; }
 CzImage::eFormat CzImage::getFormat() const		{ return (CzImage::eFormat)TextureInfo.Format; }
 bool CzImage::isFilter() const					{ return TextureInfo.Filter; }
 
+const int CzImage::ByteMask = 7;
+
 CzImage::~CzImage()
 {
 	if (Texture != NULL)
@@ -204,9 +206,80 @@ bool CzImage::Init(void* memory_file, int memory_file_size)
 
 	State = State_Loaded;
 
+	if ( CreateHitmask )
+	{
+		HitmaskCreate();
+	}
+
 	PLATFORM_IMAGING->UploadTexture(Texture);
 
 	return true;
+}
+
+void CzImage::HitmaskCreate()
+{
+	const int width = TextureInfo.Width;
+	const int height = TextureInfo.Height;
+
+	int pixelCount = width * height;
+	while ( ( pixelCount & ByteMask ) != 0 )
+	{
+		++pixelCount;
+	}
+
+	HitMask = new unsigned char[ scaleDownToBytes( pixelCount ) ];
+	unsigned char* hitMaskPtr = HitMask;
+
+	unsigned char currByte = 0;
+	int currBitNum = 0;
+
+	for ( int currRow = 0 ; currRow < height ; ++currRow )
+	{
+		for ( int currCol = 0 ; currCol < width ; ++currCol )
+		{
+			if ( PLATFORM_IMAGING->AlphaGet( Texture, currCol, currRow ) )
+			{
+				currByte |= ( 1 << currBitNum );
+			}
+
+			if ( ++currBitNum > ByteMask )
+			{
+				currentByteStore( hitMaskPtr, currByte, currBitNum );
+			}
+		}
+	}
+
+	if ( currBitNum )
+	{
+		currentByteStore( hitMaskPtr, currByte, currBitNum );
+	}
+}
+
+int CzImage::scaleDownToBytes( int pVal ) const
+{
+	return pVal >> 3;
+}
+
+void CzImage::currentByteStore( unsigned char*& hitMaskPtr, unsigned char& currByte, int& currBitNum ) const
+{
+	*hitMaskPtr++ = currByte;
+	currByte = 0;
+	currBitNum = 0;
+}
+
+unsigned char CzImage::hitMaskDataGet( int pX, int pY )
+{
+	if ( HitMask &&
+		 pX >= 0 && pX < TextureInfo.Width &&
+		 pY >= 0 && pY < TextureInfo.Height )
+	{
+		int dataOff = pX + ( pY * TextureInfo.Width );
+		int currBit = dataOff & ByteMask;
+		dataOff = scaleDownToBytes( dataOff );
+		return ( ( *(HitMask + dataOff) & ( 1 << currBit ) ) != 0 ) ? 0xff : 0x00;
+	}
+
+	return 0;
 }
 
 bool CzImage::Init(void* pixels, int width, int height, int pitch, eFormat format, bool modifiable)
@@ -638,5 +711,3 @@ int CzImage::LoadFromXoml(IzXomlResource* parent, bool load_children, CzXmlNode*
 
 	return 1;
 }
-
-

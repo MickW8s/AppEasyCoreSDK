@@ -28,6 +28,27 @@
 //
 //
 
+
+bool CzBitmapSprite::HitTestNoClip(float x, float y)
+{
+	if ( Prim->VertCount != 4  /*|| !Brush->hasHitmap() */ )
+	{
+		return CzSprite::HitTestNoClip( x, y );
+	}
+
+	CzVec2 relPos;
+	if ( !FinalTransform.InverseTransform( x, y, &relPos ) )
+	{
+		return false;
+	}
+
+	// Now check the hit mask for the sprite.
+	float relTexX = relPos.x + ( Width / 2.0f );
+	float relTexY = relPos.y + ( Height / 2.0f );
+
+	return Material->Image->hitMaskDataGet( static_cast< int >( relTexX ), static_cast< int >( relTexY ) ) != 0;
+}
+
 void CzBitmapSprite::Init(int vertex_count)
 {
 	CzSprite::Init(vertex_count);

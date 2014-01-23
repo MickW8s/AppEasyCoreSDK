@@ -27,6 +27,7 @@ public:
 protected:
 	CIwImage::Format	toMarmImageFormat(CzImage::eFormat format) const;
 	CzImage::eFormat	toCzImageFormat(CIwImage::Format format) const;
+	int					strideGet(CIwTexture* iwTex) const;
 
 public:
 	// Init
@@ -37,6 +38,7 @@ public:
 	CzTexture		CreateTexture(void* pixels, int width, int height, int pitch, CzImage::eFormat format, bool modifiable);
 	CzTexture		CreateTexture(CzTexture source, CzImage::eFormat format);
 	void			ChangeTexture(CzTexture texture, void* pixels, CzImage::eFormat format);
+	virtual bool		AlphaGet(CzTexture texture, int x, int y);
 	void			UploadTexture(CzTexture texture);
 	void			DestroyTexture(CzTexture texture);
 	void			setTextureFiltering(CzTexture texture, bool enable);

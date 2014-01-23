@@ -41,6 +41,7 @@ public:
 	virtual CzTexture	CreateTexture(void* pixels, int width, int height, int pitch, CzImage::eFormat format, bool modifiable) = 0;
 	virtual CzTexture	CreateTexture(CzTexture source, CzImage::eFormat format) = 0;
 	virtual void		ChangeTexture(CzTexture source, void* pixels, CzImage::eFormat format) = 0;
+	virtual bool		AlphaGet(CzTexture texture, int x, int y) = 0;
 	virtual void		UploadTexture(CzTexture texture) = 0;
 	virtual void		DestroyTexture(CzTexture texture) = 0;
 	virtual void		setTextureFiltering(CzTexture texture, bool enable) = 0;

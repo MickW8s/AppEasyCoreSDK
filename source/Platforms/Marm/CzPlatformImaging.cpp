@@ -28,6 +28,33 @@ void	CzPlatformImaging::Release()
 {
 }
 
+int CzPlatformImaging::strideGet(CIwTexture* iwTex) const
+{
+	return ( iwTex->GetImage().GetPitch() * 8 ) / iwTex->GetImage().GetTexelBitDepth();
+}
+
+bool CzPlatformImaging::AlphaGet(CzTexture texture, int x, int y)
+{
+	CIwTexture* t = static_cast<CIwTexture*>(texture);
+
+	int stride = strideGet( t );
+
+	unsigned int* srcPixel = (unsigned int*)( t->GetTexels() );
+	srcPixel += x +	( y * strideGet(t) );
+
+	if ( t->GetFormat() == CIwImage::ABGR_8888 )
+	{
+		return ( 0 != ( (*srcPixel) & 0xff000000 ) );
+	}
+	else if ( t->GetFormat() == CIwImage::RGBA_8888 )
+	{
+		return ( 0 != ( (*srcPixel) & 0x000000ff ) );
+	}
+
+	return true;
+
+}
+
 CIwImage::Format CzPlatformImaging::toMarmImageFormat(CzImage::eFormat format) const
 {
 	switch (format)

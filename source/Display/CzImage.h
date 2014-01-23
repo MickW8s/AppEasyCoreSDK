@@ -73,6 +73,9 @@ protected:
 	bool					FilterSet;			// True if the filter was set
 	eFormat					ToFormat;			// Format to convert texture to
 	bool					ToFormatSet;		// If set then format conversion will take place
+	bool					CreateHitmask;
+	unsigned char*			HitMask;
+	static const int		ByteMask;
 public:
 	eState					getState() const					{ return State; }
 	CzTexture				getTexture();
@@ -84,13 +87,17 @@ public:
 	bool					isFilterSet() const					{ return FilterSet; }
 	void					setToFormat(eFormat format)			{ ToFormat = format; ToFormatSet = true; }
 	eFormat					getFormat() const;
+	unsigned char			hitMaskDataGet( int pX, int pY );
 	// Properties End
 protected:
 	CzFile*					File;				// File object (if image is file based)
 	bool					DecompressJPEG(char* jpeg_data, int jpeg_data_size);
+	void					HitmaskCreate();
+	int						scaleDownToBytes( int pVal ) const;
+	void					currentByteStore( unsigned char*& hitMaskPtr, unsigned char& currByte, int& currBitNum ) const;
 
 public:
-	CzImage() :	IzXomlResource(), File(NULL), State(State_Invalid), ToFormat(Format_RGBA5551), ToFormatSet(false), Filter(true), FilterSet(false), Texture(NULL) { setClassType("image"); }
+	CzImage() :	IzXomlResource(), File(NULL), State(State_Invalid), ToFormat(Format_RGBA5551), ToFormatSet(false), Filter(true), FilterSet(false), Texture(NULL), CreateHitmask(false), HitMask(NULL) { setClassType("image"); }
 	virtual ~CzImage();
 
 /*	void			Init(const char* ResourceName, CIwResGroup* resource_group)		// Init an image from an image located within a resource group (image is not loaded)
@@ -118,6 +125,8 @@ public:
 
 	// Internal
 	void			FinishLoad();									// Called back when aysnc loading is completed
+
+	void			CreateHitmasSet(bool hitmask) { CreateHitmask = hitmask; }
 };
 
 //

@@ -64,6 +64,8 @@ public:
 	void		setUV(CzVec2* uv, int offset);							// Modifies single UV's in an existing UV list
 	void		setGeometry(CzGeometry* geom);
 
+	virtual bool	HitTestNoClip(float x, float y);
+
 	// Properties End
 
 protected:
