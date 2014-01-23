@@ -43,10 +43,16 @@ bool CzBitmapSprite::HitTestNoClip(float x, float y)
 	}
 
 	// Now check the hit mask for the sprite.
-	float relTexX = relPos.x + ( Width / 2.0f );
-	float relTexY = relPos.y + ( Height / 2.0f );
+	int relTexX = static_cast< int >( relPos.x + ( Width / 2.0f ) );
+	int relTexY = static_cast< int >( relPos.y + ( Height / 2.0f ) );
 
-	return Material->Image->hitMaskDataGet( static_cast< int >( relTexX ), static_cast< int >( relTexY ) ) != 0;
+	if ( relTexX < 0 || relTexX >= SrcWidth ||
+		 relTexY < 0 || relTexY >= SrcHeight )
+	{
+		return false;
+	}
+
+	return Material->Image->hitMaskDataGet( relTexX + SrcX, relTexY + SrcY ) != 0;
 }
 
 void CzBitmapSprite::Init(int vertex_count)
