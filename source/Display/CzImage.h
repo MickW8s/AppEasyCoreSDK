@@ -126,7 +126,7 @@ public:
 	// Internal
 	void			FinishLoad();									// Called back when aysnc loading is completed
 
-	void			CreateHitmasSet(bool hitmask) { CreateHitmask = hitmask; }
+	void			CreateHitmapSet(bool hitmask) { CreateHitmask = hitmask; }
 };
 
 //

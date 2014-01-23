@@ -48,6 +48,7 @@ const int CzImage::ByteMask = 7;
 
 CzImage::~CzImage()
 {
+	delete HitMask;
 	if (Texture != NULL)
 		PLATFORM_IMAGING->DestroyTexture(Texture);
 
