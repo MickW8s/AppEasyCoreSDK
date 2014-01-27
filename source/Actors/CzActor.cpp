@@ -1871,6 +1871,16 @@ void CzActor::setAngle(float angle)
 	}
 }
 
+void CzActor::setAngleRadians(float pRadians )
+{
+	Angle = -CzMath::RadToDeg( pRadians );
+	b2Body* body = (Box2dBody == NULL) ? NULL : Box2dBody->getBody();
+	if (body != NULL)
+	{
+		body->SetTransform(body->GetPosition(), -pRadians );	// Degrees to radians
+	}
+}
+
 /**
  @fn	void CzActor::setVelocity(float x, float y)
 

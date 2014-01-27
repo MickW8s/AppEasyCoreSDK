@@ -867,6 +867,7 @@ public:
 	void				setOriginalAngle(float angle)			{ OriginalAngle = angle; }
 	float				getOriginalAngle()						{ return OriginalAngle; }
 	void				setAngle(float angle);
+	void				setAngleRadians(float pRadians );
 	float				getAngle() const						{ return Angle; }
 	void				setVelocity(float x, float y);
 	CzVec2				getVelocity() const						{ return Velocity; }
