@@ -46,6 +46,7 @@ public:
 	void			StopAllSounds();
 	void			PauseAllSounds();
 	void			ResumeAllSounds();
+	void			SetEndSampleCB(CzSoundInst sound_inst, void* callback);
 
 	bool			isMusicCodecSupported(eCzAudioCodec codec);
 	void			setGlobalSoundVolume(float vol);

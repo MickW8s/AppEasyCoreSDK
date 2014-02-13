@@ -197,6 +197,11 @@ bool CzPlatformAudio::isSoundPlaying(CzSoundInst sound_inst) const
 	return static_cast<CIwSoundInst*>(sound_inst)->IsPlaying();
 }
 
+void CzPlatformAudio::SetEndSampleCB(CzSoundInst sound_inst, void* callback)
+{
+	static_cast<CIwSoundInst*>(sound_inst)->SetEndSampleCB( static_cast< CIwSoundInst::IwSoundInstEndSampleCB >( callback ) );
+}
+
 void CzPlatformAudio::StopAllSounds()
 {
 	// Stop all audio

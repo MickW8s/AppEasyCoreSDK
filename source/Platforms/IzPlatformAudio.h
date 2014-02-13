@@ -71,6 +71,7 @@ public:
 	virtual void			PauseAllSounds() = 0;
 	virtual void			ResumeAllSounds() = 0;
 	virtual bool			isSoundPlaying(CzSoundInst sound_inst) const = 0;
+	virtual void			SetEndSampleCB(CzSoundInst sound_inst, void* callback) = 0;
 
 	virtual bool			isMusicCodecSupported(eCzAudioCodec codec) = 0;
 	virtual void			setGlobalSoundVolume(float vol) = 0;
