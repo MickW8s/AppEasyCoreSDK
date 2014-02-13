@@ -24,7 +24,7 @@
 //#define _DEBUG_FILENAME_	"raw:///sdcard/debug.txt"
 //#define _DEBUG_FILENAME_	"rst:///AppEasy/shared/documents/debug.txt"
 #if defined(_MSC_VER)
-#define _DEBUG_FILENAME_	"raw://debug.txt"
+// #define _DEBUG_FILENAME_	"raw://debug.txt"
 #endif
 
 /**
