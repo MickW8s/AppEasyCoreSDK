@@ -859,7 +859,7 @@ public:
 	void				setMargin(int left, int right, int top, int bottom)	{ Margin.x = left, Margin.y = right, Margin.w = top, Margin.h = bottom; }
 	CzIRect				getMargin() const						{ return Margin; }
 	void				setOriginalMargin(int left, int right, int top, int bottom)	{ OriginalMargin.x = left, OriginalMargin.y = right, OriginalMargin.w = top, OriginalMargin.h = bottom; }
-	CzVec2				getPosition()							{ return Position; }
+	CzVec2				getPosition()  const					{ return Position; }
 	void				setDepth(float depth)					{ Depth = depth; }
 	float				getDepth() const						{ return Depth; }
 	void				setOrigin(float x, float y)				{ Origin.x = x; Origin.y = y; }
