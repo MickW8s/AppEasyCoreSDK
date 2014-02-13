@@ -127,6 +127,7 @@ public:
 	void			FinishLoad();									// Called back when aysnc loading is completed
 
 	void			CreateHitmapSet(bool hitmask) { CreateHitmask = hitmask; }
+	bool			HasHitmapGet() { return CreateHitmask; }
 };
 
 //
